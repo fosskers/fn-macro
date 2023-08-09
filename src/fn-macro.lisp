@@ -7,11 +7,11 @@
 (defmacro fn (&rest args)
   "Return an lambda with implicit, positional arguments.
 
-The function's arguments are determined recursively from ARGS.  Each symbol from
+The function's arguments are determined recursively from ARGS. Each symbol from
 `%1' through `%9' that appears in ARGS is treated as a positional argument.
-Missing arguments are named `_%N', which keeps the byte-compiler quiet.  `%' is
-a shorthand for `%1'; only one of these can appear in ARGS.  `%*' represents
-extra `&rest' arguments.
+Missing arguments are named `%N', which keeps the byte-compiler quiet. `%' is a
+shorthand for `%1'; only one of these can appear in ARGS. `%*' represents extra
+`&rest' arguments.
 
 Instead of:
 
