@@ -34,11 +34,11 @@ llama.el (see https://git.sr.ht/~tarsius/llama)."
               `(,@(let ((n -1)
                         sym arglist)
                     (loop for i from (1- (length argv)) above 0
-                          do (progn (setq sym (aref argv i))
-                                    (unless (and (= n -1) (null sym))
-                                      (incf n)
-                                      (push (or sym (intern (format nil "_%~a" i)))
-                                            arglist))))
+                          do (setf sym (aref argv i))
+                             (unless (and (= n -1) (null sym))
+                               (incf n)
+                               (push (or sym (intern (format nil "_%~a" i)))
+                                     arglist)))
                     arglist)
                 ,@(and (aref argv 0) '(&rest %*))))
      ,@args))
@@ -46,19 +46,20 @@ llama.el (see https://git.sr.ht/~tarsius/llama)."
 #+nil
 (funcall (fn (+ %1 %2)) 1 2)
 #+nil
-(fn (+ %1 (+ 2 %2)))
-#+nil
-(fn (+ % (+ 2 %)))
+(fn (+ % (+ 2 %2)))
 
-#+nil
-(symbol-plist 'fn-crawl)
+(defparameter arg-positions
+  (let ((table (make-hash-table :test #'equal)))
+    (loop for i from 2 below 10
+          do (setf (gethash (format nil "%~a" i) table) i))
+    table))
 
-(setf (symbol-plist 'fn-crawl) '(%2 2 %3 3 %4 4 %5 5 %6 6 %7 7 %8 8 %9 9))
 (defun fn-crawl (data args)
   (cond ((symbolp data)
-         (let ((pos (cond ((eq data '%*) 0)
-                          ((member data '(% %1) :test #'eq) 1)
-                          (t (get 'fn-crawl data)))))
+         (let* ((name (symbol-name data))
+                (pos (cond ((eq data '%*) 0)
+                           ((member name '("%" "%1") :test #'string=) 1)
+                           (t (gethash name arg-positions)))))
            (when pos
              (when (and (= pos 1)
                         (aref args 1)
