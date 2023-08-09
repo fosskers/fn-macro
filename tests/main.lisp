@@ -4,4 +4,10 @@
 (in-package :fn-macro/tests)
 
 (define-test "Basic"
-  (is = 1 1))
+  (is equal '(2 3 4) (mapcar (fn (+ % 1)) '(1 2 3))))
+
+#+nil
+(mapcar (fn (+ 1 %)) '(1 2 3))
+
+#+nil
+#'(lambda () (+ %1 (+ 2 %2)))
