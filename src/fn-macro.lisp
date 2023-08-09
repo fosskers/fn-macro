@@ -1,6 +1,7 @@
 (defpackage fn-macro
   (:use :cl)
-  (:export #:fn))
+  (:export #:fn)
+  (:documentation "A convenient lambda shorthand."))
 
 (in-package :fn-macro)
 

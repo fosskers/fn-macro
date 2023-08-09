@@ -1,18 +1,18 @@
 (defsystem "fn-macro"
-  :version "0.1.0"
+  :version "1.0.0"
   :author "Colin Woodbury"
   :mailto "colin@fosskers.ca"
-  :license "AGPL-3.0-only"
+  :license "GPL-3.0-only"
   :depends-on ()
   :components ((:module "src"
                 :components
                 ((:file "fn-macro"))))
-  :description ""
+  :description "A convenient lambda shorthand."
   :in-order-to ((test-op (test-op "fn-macro/tests"))))
 
 (defsystem "fn-macro/tests"
   :author "Colin Woodbury"
-  :license "AGPL-3.0-only"
+  :license "GPL-3.0-only"
   :depends-on ("fn-macro" "parachute")
   :components ((:module "tests"
                 :components
