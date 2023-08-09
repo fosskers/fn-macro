@@ -31,3 +31,6 @@ If there is only one argument, you can just use `%` without a number:
 
 As hinted from the above, the `%N` arguments respect nesting, can be placed in
 any order, and can appear multiple times.
+
+`fn` was borrowed and CL-ized from `fn!` in Doom Emacs, which itself was adapted
+from [llama.el](https://git.sr.ht/~tarsius/llama).
