@@ -1,8 +1,8 @@
 (defsystem "fn-macro"
-  :version "1.0.0"
+  :version "1.0.1"
   :author "Colin Woodbury"
   :mailto "colin@fosskers.ca"
-  :license "GPL-3.0-only"
+  :license "MPL-2.0"
   :depends-on ()
   :components ((:module "src"
                 :components
@@ -11,8 +11,6 @@
   :in-order-to ((test-op (test-op "fn-macro/tests"))))
 
 (defsystem "fn-macro/tests"
-  :author "Colin Woodbury"
-  :license "GPL-3.0-only"
   :depends-on ("fn-macro" "parachute")
   :components ((:module "tests"
                 :components
